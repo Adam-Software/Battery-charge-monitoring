@@ -17,7 +17,6 @@ from PySide2.QtWidgets import *
 
 # GUI FILE
 from ui_splash_screen import Ui_SplashScreen
-#from ui_main import Ui_MainWindow
 
 
 ## ==> SPLASHSCREEN WINDOW
