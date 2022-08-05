@@ -172,5 +172,5 @@ if scs_comm_result != COMM_SUCCESS:
     print("%s" % packetHandler.getTxRxResult(scs_comm_result))
 elif scs_error != 0:
     print("%s" % packetHandler.getRxPacketError(scs_error))
-# Close port
+
 portHandler.closePort()
