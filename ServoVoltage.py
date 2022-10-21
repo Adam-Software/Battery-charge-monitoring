@@ -5,7 +5,7 @@ from loguru import logger
 
 class ServoVoltage:
     def __init__(self):
-        logger.add('battery.log', retention="10 days", level="Error")
+        logger.add('battery.log', retention="10 days", level="ERROR")
 
     portHandler = Connection().getPortHandler()
     packetHandler = Connection().getPacketHandler()
