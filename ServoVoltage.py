@@ -5,10 +5,8 @@ import logging
 
 class ServoVoltage:
 
-    logging.basicConfig(format='%(asctime)s %(message)s',
-                        datefmt='%m/%d/%Y %I:%M:%S %p',
-                        encoding='utf-8',
-                        level=logging.INFO,
+    logging.basicConfig(encoding='utf-8',
+                        level=logging.DEBUG,
                         filename='battery.log',
                         filemode='w')
 
