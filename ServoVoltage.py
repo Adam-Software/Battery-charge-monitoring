@@ -6,7 +6,7 @@ import logging
 def logToFile():
     logging.basicConfig(filename='example.log',
                         level=logging.DEBUG)
-    return logging.getLogger()
+    return logging.getLogger(__name__)
 
 
 class ServoVoltage:
