@@ -2,7 +2,10 @@ from scservo_sdk import *
 from servo_serial.connection import Connection
 from loguru import logger
 
+
 class ServoVoltage:
+    def __init__(self):
+        logger.add('battery.log', retention="10 days", level="Error")
 
     portHandler = Connection().getPortHandler()
     packetHandler = Connection().getPacketHandler()
@@ -20,7 +23,7 @@ class ServoVoltage:
         scs_present_voltage = SCS_MAKEWORD(scs_present_voltage_speed, scs_comm_result)
 
         voltage = self.ToPercent(scs_present_voltage)
-        logger.info(voltage)
+        logger.error(voltage)
         return voltage
 
     @staticmethod
