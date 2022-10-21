@@ -8,9 +8,14 @@ class ServoVoltage:
     logger = None
 
     def __init__(self):
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.DEBUG)
-        self.logger.addHandler(logging.FileHandler('test_log.log', mode='w'))
+        logging.basicConfig(encoding='utf-8',
+                            level=logging.DEBUG,
+                            filename='battery.log',
+                            filemode='w')
+
+        self.logger = logging.getLogger()
+        #self.logger.setLevel(logging.DEBUG)
+        #self.logger.addHandler(logging.FileHandler('test_log.log', mode='w'))
         self.logger.info('init battery')
 
     portHandler = Connection().getPortHandler()
