@@ -1,4 +1,4 @@
-from ServoVoltage import ServoVoltage
+from servo_voltage.ServoVoltage import *
 
 
 class ServoVoltageTest:
