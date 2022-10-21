@@ -9,7 +9,8 @@ class ServoVoltage:
                         datefmt='%m/%d/%Y %I:%M:%S %p',
                         encoding='utf-8',
                         level=logging.INFO,
-                        filename='battery.log')
+                        filename='battery.log',
+                        filemode='w')
 
     portHandler = Connection().getPortHandler()
     packetHandler = Connection().getPacketHandler()
