@@ -8,7 +8,8 @@ class ServoVoltage:
     logging.basicConfig(format='%(asctime)s %(message)s',
                         datefmt='%m/%d/%Y %I:%M:%S %p',
                         encoding='utf-8',
-                        level=logging.INFO)
+                        level=logging.INFO,
+                        filename='battery.log')
 
     portHandler = Connection().getPortHandler()
     packetHandler = Connection().getPacketHandler()
@@ -26,22 +27,18 @@ class ServoVoltage:
     def setLogPath(path):
         logging.basicConfig(filename=path)
 
-    @staticmethod
-    def getLogHandlers():
-        return logging.getLogger().handlers
-
     def GetVoltage(self, servoId: int):
         scs_present_voltage_speed, scs_comm_result, scs_error = \
             self.packetHandler.read4ByteTxRx(self.portHandler, servoId, self.SCSCL_PRESENT_VOLTAGE)
 
         if scs_comm_result != COMM_SUCCESS:
-            logging.info(self.packetHandler.getTxRxResult(scs_comm_result))
+            logging.warning(self.packetHandler.getTxRxResult(scs_comm_result))
         elif scs_error != 0:
-            logging.info(self.packetHandler.getRxPacketError(scs_error))
+            logging.error(self.packetHandler.getRxPacketError(scs_error))
 
         scs_present_voltage = SCS_MAKEWORD(scs_present_voltage_speed, scs_comm_result)
 
-        logging.info(scs_present_voltage)
+        logging.warning(scs_present_voltage)
         voltage = self.ToPercent(scs_present_voltage)
         return voltage
 
