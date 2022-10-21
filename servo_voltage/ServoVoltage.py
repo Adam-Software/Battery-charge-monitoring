@@ -27,7 +27,7 @@ def ToPercent(scsPresentVoltage):
 class ServoVoltage:
 
     logger.remove()
-    logger.add('battery.log', retention="5 MB", level="ERROR")
+    logger.add('battery.log', retention="10 days", level="ERROR")
 
     @staticmethod
     def GetVoltage(servoId: int):
