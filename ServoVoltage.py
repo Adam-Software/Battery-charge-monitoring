@@ -5,10 +5,11 @@ import logging
 
 class ServoVoltage:
 
-    logging.basicConfig(encoding='utf-8',
-                        level=logging.DEBUG,
-                        filename='battery.log',
-                        filemode='w')
+    def __init__(self):
+        logging.basicConfig(encoding='utf-8',
+                            level=logging.DEBUG,
+                            filename='battery.log',
+                            filemode='w')
 
     portHandler = Connection().getPortHandler()
     packetHandler = Connection().getPacketHandler()
