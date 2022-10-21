@@ -31,8 +31,9 @@ class ServoVoltage:
         return logging.getLogger().handlers
 
     def GetVoltage(self, servoId: int):
-        scs_present_voltage_speed, scs_comm_result, scs_error = self.packetHandler.read4ByteTxRx(self.portHandler,
-                                                                                                 self.SCSCL_PRESENT_VOLTAGE)
+        scs_present_voltage_speed, scs_comm_result, scs_error = \
+            self.packetHandler.read4ByteTxRx(self.portHandler, servoId, self.SCSCL_PRESENT_VOLTAGE)
+
         if scs_comm_result != COMM_SUCCESS:
             logging.info(self.packetHandler.getTxRxResult(scs_comm_result))
         elif scs_error != 0:
