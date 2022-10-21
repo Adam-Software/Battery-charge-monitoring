@@ -3,19 +3,24 @@ from servo_serial.connection import Connection
 import logging
 
 
-class ServoVoltage:
+def logToFile():
+    logging.basicConfig(filename='example.log',
+                        level=logging.DEBUG)
+    return logging.getLogger()
 
+
+class ServoVoltage:
     logger = None
 
     def __init__(self):
-        logging.basicConfig(encoding='utf-8',
-                            level=logging.DEBUG,
-                            filename='battery.log',
-                            filemode='w')
+        #logging.basicConfig(encoding='utf-8',
+        #                    level=logging.DEBUG,
+        #                    filename='battery.log',
+        #                    filemode='w')
 
-        self.logger = logging.getLogger()
-        #self.logger.setLevel(logging.DEBUG)
-        #self.logger.addHandler(logging.FileHandler('test_log.log', mode='w'))
+        self.logger = logToFile()
+        # self.logger.setLevel(logging.DEBUG)
+        # self.logger.addHandler(logging.FileHandler('test_log.log', mode='w'))
         self.logger.info('init battery')
 
     portHandler = Connection().getPortHandler()
