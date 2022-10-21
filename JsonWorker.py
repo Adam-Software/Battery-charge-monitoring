@@ -16,3 +16,10 @@ class JsonWorker:
         with open("voltage.json", "w") as outfile:
             outfile.write(voltage)
 
+    @staticmethod
+    def readFromJson():
+        with open('voltage.json', 'r') as openfile:
+            voltage = json.load(openfile)
+
+        return voltage
+

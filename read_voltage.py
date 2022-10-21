@@ -8,13 +8,14 @@ import threading
 from pathlib import Path
 import pygame
 
+from JsonWorker import JsonWorker
 from servo_voltage.ServoVoltage import ServoVoltage
 
 # init I2C for RGB indicator
 bus = smbus.SMBus(1)
 
 # Set switch to False
-switch = False
+#switch = False
 
 
 def ledOnPower():
@@ -44,30 +45,29 @@ def ledOffPower():
 
 
 def readFromFile():
-    global switch
-    with open('/home/pi/adam/batterylevel.txt', 'r') as batteryLevelFile:
-        voltage = int(batteryLevelFile.read())
+    #global switch
+    # with open('/home/pi/adam/batterylevel.txt', 'r') as batteryLevelFile:
+    voltage = JsonWorker.readFromJson()['servo_voltage']
 
-        if voltage <= 15 and switch == False:
-            threading.Timer(1.0, playMessage).start()
-            switch = True
-            ledOnPower()
+    if voltage <= 15: # and switch == False:
+        threading.Timer(1.0, playMessage).start()
+        #switch = True
+        ledOnPower()
 
-        if voltage > 15 and switch == True:
-            switch = False
-            threading.Timer(1.0, playMessage).cancel()
-            ledOffPower()
+    if voltage > 15: # and switch == True:
+        #switch = False
+        threading.Timer(1.0, playMessage).cancel()
+        ledOffPower()
 
 
 def playMessage():
     os.system('mplayer "/home/pi/Music/prj-bat-low-15.mp3" & ')
 
-
-while 1:
-    servo_voltage = ServoVoltage().GetVoltage(13)
-
-    if servo_voltage in range(0, 100):
-        with open('/home/pi/adam/batterylevel.txt', 'w') as batterylevwrite: batterylevwrite.write(str(servo_voltage))
-
-        time.sleep(1.0)
-        readFromFile()
+# while 1:
+#    servo_voltage = ServoVoltage().GetVoltage(13)
+#
+#    if servo_voltage in range(0, 100):
+#        with open('/home/pi/adam/batterylevel.txt', 'w') as batterylevwrite: batterylevwrite.write(str(servo_voltage))
+#
+#        time.sleep(1.0)
+#        readFromFile()
