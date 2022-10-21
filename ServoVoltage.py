@@ -14,6 +14,8 @@ class ServoVoltage:
                             filemode='w')
 
         self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.DEBUG)
+        self.logger.info('init battery')
 
     portHandler = Connection().getPortHandler()
     packetHandler = Connection().getPacketHandler()
