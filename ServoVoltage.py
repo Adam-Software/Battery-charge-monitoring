@@ -5,11 +5,12 @@ import logging
 
 class ServoVoltage:
 
-    def __init__(self):
-        logging.basicConfig(encoding='utf-8',
-                            level=logging.DEBUG,
-                            filename='battery.log',
-                            filemode='w')
+    logging.basicConfig(encoding='utf-8',
+                        level=logging.DEBUG,
+                        filename='battery.log',
+                        filemode='w')
+
+    logger = logging.getLogger(__name__)
 
     portHandler = Connection().getPortHandler()
     packetHandler = Connection().getPacketHandler()
@@ -38,7 +39,7 @@ class ServoVoltage:
 
         scs_present_voltage = SCS_MAKEWORD(scs_present_voltage_speed, scs_comm_result)
 
-        logging.warning(scs_present_voltage)
+        self.logger.warning(scs_present_voltage)
         voltage = self.ToPercent(scs_present_voltage)
         return voltage
 
