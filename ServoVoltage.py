@@ -2,32 +2,41 @@ from scservo_sdk import *
 from servo_serial.connection import Connection
 from loguru import logger
 
+portHandler = Connection().getPortHandler()
+packetHandler = Connection().getPacketHandler()
+SCSCL_PRESENT_VOLTAGE = 62
+
+
+def readTx(servoId):
+    scs_present_voltage_speed, scs_comm_result, scs_error = \
+        packetHandler.read4ByteTxRx(portHandler,
+                                    servoId,
+                                    SCSCL_PRESENT_VOLTAGE)
+
+    return scs_present_voltage_speed, scs_comm_result, scs_error
+
+
+def ToPercent(scsPresentVoltage):
+    voltage = int(((scsPresentVoltage - 92) / (125 - 92)) * 100)
+    return voltage
+
 
 class ServoVoltage:
-    def __init__(self):
-        logger.remove()
-        logger.add('battery.log', retention="10 days", level="ERROR")
 
-    portHandler = Connection().getPortHandler()
-    packetHandler = Connection().getPacketHandler()
-    SCSCL_PRESENT_VOLTAGE = 62
+    logger.remove()
+    logger.add('battery.log', retention="10 days", level="ERROR")
 
-    def GetVoltage(self, servoId: int):
-        scs_present_voltage_speed, scs_comm_result, scs_error = \
-            self.packetHandler.read4ByteTxRx(self.portHandler, servoId, self.SCSCL_PRESENT_VOLTAGE)
+    @staticmethod
+    def GetVoltage(servoId: int):
+        scs_present_voltage_speed, scs_comm_result, scs_error = readTx(servoId)
 
         if scs_comm_result != COMM_SUCCESS:
-            logger.warning(self.packetHandler.getTxRxResult(scs_comm_result))
+            logger.warning(packetHandler.getTxRxResult(scs_comm_result))
         elif scs_error != 0:
-            logger.error(self.packetHandler.getRxPacketError(scs_error))
+            logger.error(packetHandler.getRxPacketError(scs_error))
 
         scs_present_voltage = SCS_MAKEWORD(scs_present_voltage_speed, scs_comm_result)
 
-        voltage = self.ToPercent(scs_present_voltage)
+        voltage = ToPercent(scs_present_voltage)
         logger.error(voltage)
-        return voltage
-
-    @staticmethod
-    def ToPercent(scsPresentVoltage):
-        voltage = int(((scsPresentVoltage - 92) / (125 - 92)) * 100)
         return voltage
