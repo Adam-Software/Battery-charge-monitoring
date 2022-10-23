@@ -19,7 +19,7 @@ def _readTx(servoId):
     return scs_present_voltage_speed, scs_comm_result, scs_error
 
 
-def ToPercent(scsPresentVoltage):
+def _ToPercent(scsPresentVoltage) -> int:
     voltage = int(((scsPresentVoltage - 92) / (125 - 92)) * 100)
     return voltage
 
@@ -30,7 +30,7 @@ class ServoVoltage:
     logger.add('battery.log', retention="10 days", level="ERROR")
 
     @staticmethod
-    def GetVoltage(servoId: int):
+    def GetVoltage(servoId: int) -> int:
         scs_present_voltage_speed, scs_comm_result, scs_error = _readTx(servoId)
 
         if scs_comm_result != COMM_SUCCESS:
@@ -41,5 +41,5 @@ class ServoVoltage:
 
         scs_present_voltage = SCS_MAKEWORD(scs_present_voltage_speed, scs_comm_result)
 
-        voltage = ToPercent(scs_present_voltage)
+        voltage = _ToPercent(scs_present_voltage)
         return voltage
