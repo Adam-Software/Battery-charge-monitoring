@@ -5,11 +5,8 @@ import smbus
 import os
 import time
 import threading
-from pathlib import Path
-import pygame
 
-from JsonWorker import JsonWorker
-from servo_voltage.ServoVoltage import ServoVoltage
+from servo_voltage.JsonWorker import JsonWorker
 
 # init I2C for RGB indicator
 bus = smbus.SMBus(1)
@@ -47,7 +44,7 @@ def ledOffPower():
 def readFromFile():
     #global switch
     # with open('/home/pi/adam/batterylevel.txt', 'r') as batteryLevelFile:
-    voltage = JsonWorker.readFromJson()['servo_voltage']
+    voltage = JsonWorker.ReadFromJson()['servo_voltage']
 
     if voltage <= 15: # and switch == False:
         threading.Timer(1.0, playMessage).start()

@@ -5,7 +5,9 @@ class JsonWorker:
     dictionary = None
 
     @staticmethod
-    def saveToJson(servoId: int, servoVoltage: int):
+    def SaveToJson(servoId: int,
+                   servoVoltage: int,
+                   path: str = 'voltage.json'):
         dictionary = \
             {
                 "servo_id": servoId,
@@ -13,11 +15,14 @@ class JsonWorker:
             }
 
         voltage = json.dumps(dictionary, indent=2)
-        with open("voltage.json", "w") as outfile:
+        with open(path, "w") as outfile:
             outfile.write(voltage)
 
+        outfile.close()
+
     @staticmethod
-    def getJson(servoId: int, servoVoltage: int):
+    def GetJson(servoId: int,
+                servoVoltage: int):
         dictionary = \
             {
                 "servo_id": servoId,
@@ -27,9 +32,10 @@ class JsonWorker:
         return voltage
 
     @staticmethod
-    def readFromJson():
-        with open('voltage.json', 'r') as openfile:
+    def ReadFromJson(path: str = 'voltage.json'):
+        with open(path, 'r') as openfile:
             voltage = json.load(openfile)
 
+        openfile.close()
         return voltage
 

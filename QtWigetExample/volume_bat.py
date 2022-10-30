@@ -8,15 +8,15 @@
 
 from collections import Counter
 import sys
-import time
 import platform
 from PySide2 import QtCore, QtGui, QtWidgets
-from PySide2.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime, QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QIcon, QKeySequence,
+                           QPalette, QPainter, QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
+from servo_voltage.JsonWorker import JsonWorker
 # GUI FILE
-from ui_splash_screen import Ui_SplashScreen
+from QtWigetExample.ui_splash_screen import Ui_SplashScreen
 
 
 ## ==> SPLASHSCREEN WINDOW
@@ -30,8 +30,8 @@ class SplashScreen(QMainWindow):
         self.progressBarValue(0)
 
         ## ==> REMOVE STANDARD TITLE BAR
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint) # Remove title bar
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground) # Set background to transparent
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)  # Remove title bar
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # Set background to transparent
 
         ## ==> APPLY DROP SHADOW EFFECT
         self.shadow = QGraphicsDropShadowEffect(self)
@@ -40,24 +40,22 @@ class SplashScreen(QMainWindow):
         self.shadow.setYOffset(0)
         self.shadow.setColor(QColor(0, 0, 0, 120))
         self.ui.circularBg.setGraphicsEffect(self.shadow)
-        
+
         ## QTIMER ==> START
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.progress)
         # TIMER IN MILLISECONDS
         self.timer.start(15)
-        
+
         ## SHOW ==> MAIN WINDOW
         ########################################################################
         self.show()
 
     ## DEF TO LOANDING
     ########################################################################
-    def progress (self):
-      
-      with open('/home/pi/adam/batterylevel.txt', 'r') as batterylevrd:
-        value = int(batterylevrd.read())
-        
+    def progress(self):
+        value = int(JsonWorker.ReadFromJson()['servo_voltage'])
+
         # HTML TEXT PERCENTAGE
         htmlText = """<p><span style=" font-size:68pt;">{VALUE}</span><span style=" font-size:58pt; vertical-align:super;">%</span></p>"""
 
@@ -65,13 +63,14 @@ class SplashScreen(QMainWindow):
         newHtml = htmlText.replace("{VALUE}", str(value))
         self.ui.labelPercentage.setText(newHtml)
 
-        if value >= 100: value = 100
+        if value >= 100:
+            value = 100
+
         self.progressBarValue(value)
 
     ## DEF PROGRESS BAR VALUE
     ########################################################################
     def progressBarValue(self, value):
-
         # PROGRESSBAR STYLESHEET BASE
         styleSheet = """
         QFrame{
