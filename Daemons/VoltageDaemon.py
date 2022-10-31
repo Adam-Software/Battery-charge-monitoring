@@ -25,8 +25,7 @@ def terminate(signalNumber, frame):
 
 
 def VoltageUpdate(servoId:int, pollingFrequency: float, voltageJsonFilePath: str):
-    servoId = 13
-    logger.info(f"Voltage daemon started for servo id {servoId}"
+    logger.info(f"Voltage daemon started for servo id {servoId} "
                 f"Polling grequency is {pollingFrequency} "
                 f"Json file path is {voltageJsonFilePath} ")
 
@@ -41,7 +40,7 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--servo-id', default=13,
                         help='Id of the servo with which the voltage will be monitored. The default value is 13')
     parser.add_argument('-t', '--polling-frequency', default=5,
-                        help='Frequency of servo polling. The default value is 13')
+                        help='Frequency of servo polling. The default value is 5')
     parser.add_argument('-j', '--json-save-path', default='/home/pi/voltage.json',
                         help='The storage location of the json file in which the voltage is written')
     args = parser.parse_args()
