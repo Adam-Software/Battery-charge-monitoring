@@ -52,4 +52,4 @@ if __name__ == "__main__":
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 
-    VoltageUpdate(args.servo_id, args.polling_frequency, args.json_save_path)
+    VoltageUpdate(int(args.servo_id),float(args.polling_frequency), args.json_save_path)
