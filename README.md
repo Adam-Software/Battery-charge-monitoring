@@ -4,7 +4,6 @@
 [![Activity](https://img.shields.io/github/commit-activity/m/Adam-Software/Servo-voltage)](https://img.shields.io/github/commit-activity/m/Adam-Software/Servo-voltage)
 [![LastStatus](https://img.shields.io/github/last-commit/Adam-Software/Servo-voltage)](https://img.shields.io/github/last-commit/Adam-Software/Servo-voltage)
 [![CodeSize](https://img.shields.io/github/languages/code-size/Adam-Software/Servo-voltage)](https://img.shields.io/github/languages/code-size/Adam-Software/Servo-voltage)
-[![Depencies](https://img.shields.io/librariesio/github/Adam-Software/Servo-voltage)](https://img.shields.io/librariesio/github/Adam-Software/Servo-voltage)
 
 ### What the library can do?
 
