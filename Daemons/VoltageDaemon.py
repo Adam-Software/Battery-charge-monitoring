@@ -4,6 +4,9 @@ import logging
 import sys
 import signal
 
+from servo_voltage.JsonWorker import JsonWorker
+from servo_voltage.ServoVoltage import *
+
 logger = logging.getLogger('VoltageDaemon')
 logger.setLevel(logging.INFO)
 formatstr = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
