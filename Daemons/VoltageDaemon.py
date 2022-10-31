@@ -39,10 +39,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Voltage daemon")
     # Мы можем заменить default или запускать приложение с указанием нахождения
     # log файла, через параметр -l /путь_к_файлу/файл.log
-    parser.add_argument('-l', '--logfile', default='/home/pi/test_daemon.log')
-    parser.add_argument('-s', '--servoId', default=13)
-    parser.add_argument('-t', '--pollingFrequency', default=5)
-    parser.add_argument('-j', '--jsonSavePath', default='/home/pi/voltage.json')
+    parser.add_argument('-l', '--log-file', default='/home/pi/test_daemon.log')
+    parser.add_argument('-s', '--serv-id', default=13)
+    parser.add_argument('-t', '--polling-frequency', default=5)
+    parser.add_argument('-j', '--json-save-path', default='/home/pi/voltage.json')
     args = parser.parse_args()
     print(parser)
     signal.signal(signal.SIGTERM, terminate)
@@ -52,4 +52,4 @@ if __name__ == "__main__":
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 
-    VoltageUpdate(args.servoId, args.pollingFrequency, args.jsonSavePath)
+    VoltageUpdate(args.servo_id, args.polling_frequency, args.json_save_path)
