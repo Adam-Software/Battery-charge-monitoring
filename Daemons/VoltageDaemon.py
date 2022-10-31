@@ -26,7 +26,7 @@ def terminate(signalNumber, frame):
 
 def VoltageUpdate(servoId:int, pollingFrequency: float, voltageJsonFilePath: str):
     servoId = 13
-    logger.info(f"Voltage daemon started for servo id {servoId} "
+    logger.info(f"Voltage daemon started for servo id {servoId}"
                 f"Polling grequency is {pollingFrequency} "
                 f"Json file path is {voltageJsonFilePath} ")
 
@@ -37,14 +37,15 @@ def VoltageUpdate(servoId:int, pollingFrequency: float, voltageJsonFilePath: str
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Voltage daemon")
-    # Мы можем заменить default или запускать приложение с указанием нахождения
-    # log файла, через параметр -l /путь_к_файлу/файл.log
-    parser.add_argument('-l', '--log-file', default='/home/pi/test_daemon.log')
-    parser.add_argument('-s', '--serv-id', default=13)
-    parser.add_argument('-t', '--polling-frequency', default=5)
-    parser.add_argument('-j', '--json-save-path', default='/home/pi/voltage.json')
+    parser.add_argument('-l', '--log-file', default='/home/pi/test_daemon.log', help='Log files path')
+    parser.add_argument('-s', '--servo-id', default=13,
+                        help='Id of the servo with which the voltage will be monitored. The default value is 13')
+    parser.add_argument('-t', '--polling-frequency', default=5,
+                        help='Frequency of servo polling. The default value is 13')
+    parser.add_argument('-j', '--json-save-path', default='/home/pi/voltage.json',
+                        help='The storage location of the json file in which the voltage is written')
     args = parser.parse_args()
-    print(parser)
+
     signal.signal(signal.SIGTERM, terminate)
 
     fh = logging.FileHandler(args.log_file)
