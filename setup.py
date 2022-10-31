@@ -7,7 +7,7 @@ setup(
     name='servo-voltage',
     version='0.0.1',
     packages=['servo_voltage'],
-    url='',
+    url='https://github.com/Adam-Software/Servo-voltage',
     license='MIT',
     author='vertigra',
     author_email='a@nesterof.com',
@@ -18,7 +18,7 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
-        'Operating System :: POSIX :: Other',
+        'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9'
