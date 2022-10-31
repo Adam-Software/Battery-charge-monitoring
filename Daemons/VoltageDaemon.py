@@ -26,9 +26,9 @@ def terminate(signalNumber, frame):
 
 def VoltageUpdate(servoId:int, pollingFrequency: float, voltageJsonFilePath: str):
     servoId = 13
-    logger.info(f"Voltage daemon started for servo id {servoId}"
-                f"Polling grequency is {pollingFrequency}"
-                f"Json file path is {voltageJsonFilePath}")
+    logger.info(f"Voltage daemon started for servo id {servoId} "
+                f"Polling grequency is {pollingFrequency} "
+                f"Json file path is {voltageJsonFilePath} ")
 
     while True:
         voltage = ServoVoltage().GetVoltage(servoId)
@@ -41,6 +41,7 @@ if __name__ == "__main__":
     # log файла, через параметр -l /путь_к_файлу/файл.log
     parser.add_argument('-l', '--log-file', default='/home/pi/test_daemon.log')
     parser.add_argument('-s', '--servo-id', default=13)
+    parser.add_argument('-t', '--polling-frequency', default=5)
     parser.add_argument('-j', '--json-save-path', default='/home/pi/voltage.json')
     args = parser.parse_args()
     print(parser)
@@ -51,4 +52,4 @@ if __name__ == "__main__":
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 
-    VoltageUpdate(13, 5, '/home/pi/voltage.json')
+    VoltageUpdate(args.servo-id, args.polling-frequency, args.json-save-path)
