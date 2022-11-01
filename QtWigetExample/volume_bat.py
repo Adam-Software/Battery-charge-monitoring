@@ -54,7 +54,7 @@ class SplashScreen(QMainWindow):
     ## DEF TO LOANDING
     ########################################################################
     def progress(self):
-        value = int(JsonWorker.ReadFromJson()['servo_voltage'])
+        value = int(JsonWorker.ReadFromJson('/tmp/voltage.json')['servo_voltage'])
 
         # HTML TEXT PERCENTAGE
         htmlText = """<p><span style=" font-size:68pt;">{VALUE}</span><span style=" font-size:58pt; vertical-align:super;">%</span></p>"""
