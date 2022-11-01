@@ -16,3 +16,9 @@
 
 1. Get the servo voltage value using the feetech sdk
 2. Serialize and deserialize voltage values in json
+
+### How install
+
+```commandline
+pip install servo-voltage
+```
