@@ -22,3 +22,14 @@
 ```commandline
 pip install servo-voltage
 ```
+
+### How to get values using the feetech sdk?
+
+```python
+from servo_voltage.ServoVoltage import *
+
+def ServoVoltage():
+    servoId = 13
+    voltage = ServoVoltage().GetVoltage(servoId)
+```
+
