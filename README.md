@@ -4,6 +4,13 @@
 [![Activity](https://img.shields.io/github/commit-activity/m/Adam-Software/Servo-voltage)](https://img.shields.io/github/commit-activity/m/Adam-Software/Servo-voltage)
 [![LastStatus](https://img.shields.io/github/last-commit/Adam-Software/Servo-voltage)](https://img.shields.io/github/last-commit/Adam-Software/Servo-voltage)
 [![CodeSize](https://img.shields.io/github/languages/code-size/Adam-Software/Servo-voltage)](https://img.shields.io/github/languages/code-size/Adam-Software/Servo-voltage)
+[![Depencies](https://img.shields.io/librariesio/github/Adam-Software/Servo-voltage)](https://img.shields.io/librariesio/github/Adam-Software/Servo-voltage)
+
+[![PyPI version](https://badge.fury.io/py/servo-voltage.svg)](https://badge.fury.io/py/servo-voltage)
+[![PythonVersion](https://img.shields.io/pypi/pyversions/servo-voltage)](https://img.shields.io/pypi/pyversions/servo-voltage)
+[![Wheel](https://img.shields.io/pypi/wheel/servo-voltage)](https://img.shields.io/pypi/wheel/servo-voltage)
+[![Status](https://img.shields.io/pypi/status/servo-voltage)](https://img.shields.io/pypi/status/servo-voltage)
+[![Format](https://img.shields.io/pypi/format/servo-voltage)](https://img.shields.io/pypi/format/servo-voltage)
 
 ### What the library can do?
 
