@@ -6,7 +6,7 @@ After=syslog.target
 Type=simple
 User=pi
 Group=pi
-WorkingDirectory=/home/pi/adam/
+WorkingDirectory=/srv/daemons/
 ExecStart=/usr/bin/python3 /srv/daemons/VoltageDaemon.py -l /var/log/voltage-daemon.log -s 13 -t 5 -j /tmp/voltage.json
 
 [Install]
