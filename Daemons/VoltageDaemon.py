@@ -14,12 +14,6 @@ formatter = logging.Formatter(formatstr)
 
 
 def terminate(signalNumber, frame):
-    """
-    Здесь мы можем обработать завершение нашего приложения
-    Главное не забыть в конце выполнить выход sys.exit()
-    """
-
-
     logger.info(f'Recieved {signalNumber}')
     sys.exit()
 
