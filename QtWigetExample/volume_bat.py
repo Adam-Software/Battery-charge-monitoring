@@ -16,7 +16,7 @@ from PySide2.QtWidgets import *
 
 from servo_voltage.JsonWorker import JsonWorker
 # GUI FILE
-from QtWigetExample.ui_splash_screen import Ui_SplashScreen
+from ui_splash_screen import Ui_SplashScreen
 
 
 ## ==> SPLASHSCREEN WINDOW
