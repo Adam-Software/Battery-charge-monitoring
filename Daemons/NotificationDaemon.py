@@ -16,6 +16,7 @@ logger.setLevel(logging.INFO)
 formatstr = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 formatter = logging.Formatter(formatstr)
 
+bus = smbus.SMBus(1)
 
 def terminate(signalNumber, frame):
     logger.info(f'Recieved {signalNumber}')
