@@ -31,7 +31,7 @@ def JsonReadUpdate(pollingFrequency: float,
                 f"Battery level warning {batteryLevelWarning}"
                 f"Music file path {musicFilePath}")
 
-    musicTimer = threading.Timer(1.0, playMessage(musicFilePath))
+    musicTimer = threading.Timer(1.0, playMessage, args=musicFilePath)
 
     while True:
         voltage = JsonWorker.ReadFromJson(voltageJsonFilePath)['servo_voltage']
