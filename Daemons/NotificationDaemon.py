@@ -69,7 +69,7 @@ def EnableRgbMatrix():
 
 def playMessage(musicFilePath: str):
     try:
-        os.system(f'mplayer -really-quiet {musicFilePath}')
+        os.system(f'ffplay -nodisp {musicFilePath}')
     except Exception as err:
         logger.error(f"Unexpected {err=}, {type(err)=}")
         pass
