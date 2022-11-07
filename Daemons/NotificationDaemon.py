@@ -48,17 +48,31 @@ def JsonReadUpdate(pollingFrequency: float,
 
 def ClearRgbMatrix():
     mass = [170, 255, 0, 0, 0, 0, 5, 0]
-    bus.write_i2c_block_data(0x5f, 0, mass)
-    bus.write_i2c_block_data(0x5E, 0, mass)
+    try:
+        bus.write_i2c_block_data(0x5f, 0, mass)
+        bus.write_i2c_block_data(0x5E, 0, mass)
+    except Exception as err:
+        logger.error(f"Unexpected {err=}, {type(err)=}")
+        pass
+
 
 def EnableRgbMatrix():
     ClearRgbMatrix()
     mass = [170, 0xFC, 2, 1, 44, 1, 4, 0]
-    bus.write_i2c_block_data(0x5F, 0, mass)
-    bus.write_i2c_block_data(0x5E, 0, mass)
+    try:
+        bus.write_i2c_block_data(0x5F, 0, mass)
+        bus.write_i2c_block_data(0x5E, 0, mass)
+    except Exception as err:
+        logger.error(f"Unexpected {err=}, {type(err)=}")
+        pass
+
 
 def playMessage(musicFilePath: str):
-    os.system(f'mplayer {musicFilePath} & ')
+    try:
+        os.system(f'mplayer {musicFilePath} & ')
+    except Exception as err:
+        logger.error(f"Unexpected {err=}, {type(err)=}")
+        pass
 
 
 if __name__ == "__main__":
