@@ -37,11 +37,15 @@ def JsonReadUpdate(pollingFrequency: float,
         voltage = JsonWorker.ReadFromJson(voltageJsonFilePath)['servo_voltage']
 
         if voltage <= batteryLevelWarning:
-            musicTimer.start()
+            if musicTimer.isAlive() is False:
+                musicTimer.start()
+
             EnableRgbMatrix()
 
         if voltage > batteryLevelWarning:
-            musicTimer.cancel()
+            if musicTimer.isAlive():
+                musicTimer.cancel()
+
             ClearRgbMatrix()
 
         time.sleep(pollingFrequency)
@@ -69,7 +73,7 @@ def EnableRgbMatrix():
 
 def playMessage(musicFilePath: str):
     try:
-        os.system(f'ffplay -nodisp {musicFilePath}')
+        os.system(f'ffplay -autoexit -nodisp {musicFilePath}')
     except Exception as err:
         logger.error(f"Unexpected {err=}, {type(err)=}")
         pass
