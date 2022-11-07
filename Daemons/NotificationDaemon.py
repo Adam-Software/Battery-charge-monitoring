@@ -36,7 +36,7 @@ def JsonReadUpdate(pollingFrequency: float,
         voltage = JsonWorker.ReadFromJson(voltageJsonFilePath)['servo_voltage']
 
         if voltage <= batteryLevelWarning:
-            musicTimer = threading.Timer(1.0, playMessage, args=musicFilePath)
+            musicTimer = threading.Timer(1.0, playMessage, [musicFilePath])
 
             if musicTimer.is_alive() is False:
                 musicTimer.start()
