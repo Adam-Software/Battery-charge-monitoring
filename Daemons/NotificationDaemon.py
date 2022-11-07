@@ -39,13 +39,17 @@ def JsonReadUpdate(pollingFrequency: float,
         if voltage <= batteryLevelWarning:
             if musicTimer.is_alive() is False:
                 musicTimer.start()
+                logger.info('timer start')
 
+            logger.info('Warning enable')
             EnableRgbMatrix()
 
         if voltage > batteryLevelWarning:
             if musicTimer.is_alive():
                 musicTimer.cancel()
+                logger.info('timer cancel')
 
+            logger.info('Warning disable')
             ClearRgbMatrix()
 
         time.sleep(pollingFrequency)
@@ -56,7 +60,7 @@ def ClearRgbMatrix():
         bus.write_i2c_block_data(0x5f, 0, mass)
         bus.write_i2c_block_data(0x5E, 0, mass)
     except Exception as err:
-        logger.error(f"Unexpected {err=}, {type(err)=}")
+        logger.error(f"Unexpected rgb clear error {err=}, {type(err)=}")
         pass
 
 
@@ -67,15 +71,14 @@ def EnableRgbMatrix():
         bus.write_i2c_block_data(0x5F, 0, mass)
         bus.write_i2c_block_data(0x5E, 0, mass)
     except Exception as err:
-        logger.error(f"Unexpected {err=}, {type(err)=}")
+        logger.error(f"Unexpected rgb enable {err=}, {type(err)=}")
         pass
-
 
 def playMessage(musicFilePath: str):
     try:
         os.system(f'ffplay -autoexit -nodisp {musicFilePath}')
     except Exception as err:
-        logger.error(f"Unexpected {err=}, {type(err)=}")
+        logger.error(f"Unexpected play message {err=}, {type(err)=}")
         pass
 
 
