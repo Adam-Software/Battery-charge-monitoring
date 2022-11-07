@@ -23,6 +23,7 @@ def ledOnPower():
     mass = [170, 255, 0, 0, 0, 0, 5, 0]
     bus.write_i2c_block_data(0x5E, 0, mass)
     time.sleep(0.005)
+
     # On Leds of RGB Matrix
     mass = [170, 0xFC, 2, 1, 44, 1, 4, 0]
     bus.write_i2c_block_data(0x5F, 0, mass)
@@ -36,6 +37,7 @@ def ledOffPower():
     mass = [170, 255, 0, 0, 0, 0, 5, 0]
     bus.write_i2c_block_data(0x5f, 0, mass)
     time.sleep(0.005)
+
     mass = [170, 255, 0, 0, 0, 0, 5, 0]
     bus.write_i2c_block_data(0x5E, 0, mass)
     time.sleep(0.005)
