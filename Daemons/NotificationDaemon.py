@@ -37,11 +37,11 @@ def JsonReadUpdate(pollingFrequency: float,
 
         if voltage <= batteryLevelWarning:
             musicTimer.start()
-            ledOnPower()
+            EnableRgbMatrix()
 
         if voltage > batteryLevelWarning:
             musicTimer.cancel()
-            ledOffPower()
+            ClearRgbMatrix()
 
         time.sleep(pollingFrequency)
 
