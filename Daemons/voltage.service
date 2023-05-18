@@ -4,9 +4,9 @@ After=syslog.target
 
 [Service]
 Type=simple
-User=pi
-Group=pi
-WorkingDirectory=/srv/daemons/
+User=adam
+Group=adam
+WorkingDirectory=/var/lib/voltage-daemons/
 ExecStart=/usr/bin/python3 /var/lib/voltage-daemons/VoltageDaemon.py -l /var/log/voltage-daemon.log -s 13 -t 5 -j /tmp/voltage.json
 
 [Install]
