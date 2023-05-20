@@ -30,12 +30,12 @@ def VoltageUpdate(servoId:int, pollingFrequency: float, voltageJsonFilePath: str
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Voltage daemon")
-    parser.add_argument('-l', '--log-file', default='/home/pi/voltage_daemon.log', help='Log files path')
+    parser.add_argument('-l', '--log-file', default='/var/log/voltage_daemon.log', help='Log files path')
     parser.add_argument('-s', '--servo-id', default=13,
                         help='Id of the servo with which the voltage will be monitored. The default value is 13')
     parser.add_argument('-t', '--polling-frequency', default=5,
                         help='Frequency of servo polling. The default value is 5')
-    parser.add_argument('-j', '--json-save-path', default='/home/pi/voltage.json',
+    parser.add_argument('-j', '--json-save-path', default='/tmp/voltage.json',
                         help='The storage location of the json file in which the voltage is written')
     args = parser.parse_args()
 
