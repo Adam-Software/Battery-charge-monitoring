@@ -85,14 +85,14 @@ def playMessage(musicFilePath: str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Notification daemon")
-    parser.add_argument('-l', '--log-file', default='/home/pi/voltage_daemon.log', help='Log files path')
+    parser.add_argument('-l', '--log-file', default='/var/log/voltage_daemon.log', help='Log files path')
     parser.add_argument('-t', '--polling-frequency', default=5,
                         help='Frequency of json read polling. The default value is 5')
-    parser.add_argument('-j', '--json-save-path', default='/home/pi/voltage.json',
+    parser.add_argument('-j', '--json-save-path', default='/tmp/voltage.json',
                         help='The storage location of the json file in which the voltage reader')
     parser.add_argument('-w', '--warning-battery-level', default=15,
                         help='The battery charge level at which alerts are activated')
-    parser.add_argument('-m', '--music-file-path', default='/home/pi/Music/prj-bat-low-15.mp3',
+    parser.add_argument('-m', '--music-file-path', default='bat-low-15.mp3',
                         help='Music file for alerts')
 
     args = parser.parse_args()
