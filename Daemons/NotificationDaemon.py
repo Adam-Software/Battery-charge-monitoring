@@ -46,9 +46,10 @@ def JsonReadUpdate(pollingFrequency: float,
             EnableRgbMatrix()
 
         if voltage > batteryLevelWarning:
-            if musicTimer.is_alive() and musicTimer is not  None:
-                musicTimer.cancel()
-                logger.info('timer cancel')
+            if(musicTimer is not  None):
+                if musicTimer.is_alive():
+                    musicTimer.cancel()
+                    logger.info('timer cancel')
 
             logger.info('Warning disable')
             ClearRgbMatrix()
