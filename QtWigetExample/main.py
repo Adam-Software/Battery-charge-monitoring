@@ -74,7 +74,7 @@ class SplashScreen(QMainWindow):
         # PROGRESSBAR STYLESHEET BASE
         styleSheet = """
         QFrame{
-        	border-radius: 150px;
+        	border-radius: 210px;
         	background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{STOP_1} rgba(255, 0, 127, 0), stop:{STOP_2} rgba(85, 170, 255, 255));
         }
         """
