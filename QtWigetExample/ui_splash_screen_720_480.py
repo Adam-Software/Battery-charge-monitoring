@@ -130,7 +130,7 @@ class Ui_SplashScreen(object):
         SplashScreen.setWindowTitle(QCoreApplication.translate("SplashScreen", u"MainWindow", None))
         self.labelTitle.setText(QCoreApplication.translate("SplashScreen", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:600; color:#aaaaff;\">ADAM</span><span style=\" font-size:18pt;\"> BATTERY LEVEL</span></p></body></html>", None))
         self.labelPercentage.setText(QCoreApplication.translate("SplashScreen", u"<p><span style=\" font-size:72pt;\">0</span><span style=\" font-size:72pt; vertical-align:super;\">%</span></p>", None))
-        self.labelLoadingInfo.setText(QCoreApplication.translate("SplashScreen", u"MAIN", None))
+        self.labelLoadingInfo.setText(QCoreApplication.translate("SplashScreen", u"VOLUME", None))
         self.labelCredits.setText(QCoreApplication.translate("SplashScreen", u"by: Robot LLC, 2023", None))
     # retranslateUi
 
