@@ -6,6 +6,8 @@ After=syslog.target
 Type=simple
 User=adam
 Group=adam
+Restart=always
+RestartSec=5
 WorkingDirectory=/var/lib/voltage-daemons/
 ExecStart=/usr/bin/python3 /var/lib/voltage-daemons/NotificationDaemon.py -l /var/log/notification-daemon.log -t 5 -j /tmp/voltage.json
 
