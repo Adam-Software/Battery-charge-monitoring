@@ -18,8 +18,8 @@ formatter = logging.Formatter(formatstr)
 
 bus = smbus.SMBus(1)
 
-# Set switch to False
-switch = False
+# Set is_rgb_enbled to False
+is_rgb_enbled = False
 
 def terminate(signalNumber, frame):
     logger.info(f'Recieved {signalNumber}')
@@ -35,12 +35,12 @@ def JsonReadUpdate(pollingFrequency: float,
                 f"Music file path {musicFilePath}")
 
     while True:
-        global switch
+        global is_rgb_enbled
         musicTimer = None
         voltage = JsonWorker.ReadFromJson(voltageJsonFilePath)['servo_voltage']
 
-        if voltage <= batteryLevelWarning and switch == False:
-            switch = True
+        if voltage <= batteryLevelWarning and is_rgb_enbled == False:
+            is_rgb_enbled = True
 
             musicTimer = threading.Timer(1.0, playMessage, [musicFilePath])
 
@@ -51,8 +51,8 @@ def JsonReadUpdate(pollingFrequency: float,
             logger.info('Warning enable')
             EnableRgbMatrix()
 
-        if voltage > batteryLevelWarning and switch == True:
-            switch = False
+        if voltage > batteryLevelWarning and is_rgb_enbled == True:
+            is_rgb_enbled = False
             if musicTimer is not  None and musicTimer.is_alive():
                 musicTimer.cancel()
                 logger.info('timer cancel')
