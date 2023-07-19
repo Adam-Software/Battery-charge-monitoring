@@ -56,15 +56,15 @@ class SplashScreen(QMainWindow):
     def progress(self):
         value = int(JsonWorker.ReadFromJson('/tmp/voltage.json')['servo_voltage'])
 
+        if value >= 100:
+            value = 100
+          
         # HTML TEXT PERCENTAGE
         htmlText = """<p><span style=" font-size:68pt;">{VALUE}</span><span style=" font-size:58pt; vertical-align:super;">%</span></p>"""
 
         # REPLACE VALUE
         newHtml = htmlText.replace("{VALUE}", str(value))
         self.ui.labelPercentage.setText(newHtml)
-
-        if value >= 100:
-            value = 100
 
         self.progressBarValue(value)
 
