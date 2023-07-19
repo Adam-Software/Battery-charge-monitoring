@@ -12,11 +12,14 @@ from servo_voltage.JsonWorker import JsonWorker
 from servo_voltage.ServoVoltage import *
 
 logger = logging.getLogger('NotificationDaemon')
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.ERROR)
 formatstr = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 formatter = logging.Formatter(formatstr)
 
 bus = smbus.SMBus(1)
+
+# Set is_rgb_enbled to False
+is_rgb_enbled = False
 
 def terminate(signalNumber, frame):
     logger.info(f'Recieved {signalNumber}')
@@ -32,10 +35,13 @@ def JsonReadUpdate(pollingFrequency: float,
                 f"Music file path {musicFilePath}")
 
     while True:
+        global is_rgb_enbled
         musicTimer = None
         voltage = JsonWorker.ReadFromJson(voltageJsonFilePath)['servo_voltage']
 
-        if voltage <= batteryLevelWarning:
+        if voltage <= batteryLevelWarning and is_rgb_enbled == False:
+            is_rgb_enbled = True
+
             musicTimer = threading.Timer(1.0, playMessage, [musicFilePath])
 
             if musicTimer.is_alive() is False:
@@ -45,11 +51,11 @@ def JsonReadUpdate(pollingFrequency: float,
             logger.info('Warning enable')
             EnableRgbMatrix()
 
-        if voltage > batteryLevelWarning:
-            if(musicTimer is not  None):
-                if musicTimer.is_alive():
-                    musicTimer.cancel()
-                    logger.info('timer cancel')
+        if voltage > batteryLevelWarning and is_rgb_enbled == True:
+            is_rgb_enbled = False
+            if musicTimer is not  None and musicTimer.is_alive():
+                musicTimer.cancel()
+                logger.info('timer cancel')
 
             logger.info('Warning disable')
             ClearRgbMatrix()
@@ -59,8 +65,8 @@ def JsonReadUpdate(pollingFrequency: float,
 def ClearRgbMatrix():
     mass = [170, 255, 0, 0, 0, 0, 5, 0]
     try:
-        bus.write_i2c_block_data(0x5f, 0, mass)
         bus.write_i2c_block_data(0x5E, 0, mass)
+        bus.write_i2c_block_data(0x5D, 0, mass)
     except Exception as err:
         logger.error(f"Unexpected rgb clear error {err=}, {type(err)=}")
         pass
@@ -70,8 +76,8 @@ def EnableRgbMatrix():
     ClearRgbMatrix()
     mass = [170, 0xFC, 2, 1, 44, 1, 4, 0]
     try:
-        bus.write_i2c_block_data(0x5F, 0, mass)
         bus.write_i2c_block_data(0x5E, 0, mass)
+        bus.write_i2c_block_data(0x5D, 0, mass)
     except Exception as err:
         logger.error(f"Unexpected rgb enable {err=}, {type(err)=}")
         pass
@@ -101,7 +107,7 @@ if __name__ == "__main__":
     signal.signal(signal.SIGTERM, terminate)
 
     fh = logging.FileHandler(args.log_file)
-    fh.setLevel(logging.INFO)
+    fh.setLevel(logging.ERROR)
     fh.setFormatter(formatter)
     logger.addHandler(fh)
 

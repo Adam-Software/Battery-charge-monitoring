@@ -16,7 +16,7 @@ from PySide2.QtWidgets import *
 
 from servo_voltage.JsonWorker import JsonWorker
 # GUI FILE
-from ui_splash_screen import Ui_SplashScreen
+from ui_splash_screen_720_480 import Ui_SplashScreen
 
 
 ## ==> SPLASHSCREEN WINDOW
@@ -56,15 +56,15 @@ class SplashScreen(QMainWindow):
     def progress(self):
         value = int(JsonWorker.ReadFromJson('/tmp/voltage.json')['servo_voltage'])
 
+        if value >= 100:
+            value = 100
+          
         # HTML TEXT PERCENTAGE
         htmlText = """<p><span style=" font-size:68pt;">{VALUE}</span><span style=" font-size:58pt; vertical-align:super;">%</span></p>"""
 
         # REPLACE VALUE
         newHtml = htmlText.replace("{VALUE}", str(value))
         self.ui.labelPercentage.setText(newHtml)
-
-        if value >= 100:
-            value = 100
 
         self.progressBarValue(value)
 
@@ -74,7 +74,7 @@ class SplashScreen(QMainWindow):
         # PROGRESSBAR STYLESHEET BASE
         styleSheet = """
         QFrame{
-        	border-radius: 150px;
+        	border-radius: 210px;
         	background-color: qconicalgradient(cx:0.5, cy:0.5, angle:90, stop:{STOP_1} rgba(255, 0, 127, 0), stop:{STOP_2} rgba(85, 170, 255, 255));
         }
         """
