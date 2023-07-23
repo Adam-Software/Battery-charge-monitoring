@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from scservo_sdk import *
-from servo_serial.connection import Connection
+from Connection import Connection
 from loguru import logger
 
 portHandler = Connection().getPortHandler()
