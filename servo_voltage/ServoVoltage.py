@@ -21,7 +21,7 @@ def _readTx(servoId):
 
 def _ToPercent(scsPresentVoltage) -> int:
     voltage = int(((scsPresentVoltage - 92) / (125 - 92)) * 100)
-    return voltage
+    return (abs(voltage))
 
 
 class ServoVoltage:
